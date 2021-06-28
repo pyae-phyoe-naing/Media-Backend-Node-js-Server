@@ -5,11 +5,25 @@ const cat = require('./database/cat');
 
 let catObj = {
     id : 1,
-    name : 'Computer',
-    image : 'acer.png',
+    name : 'Car',
+    image : 'crown.png',
     since :  Date.now()
 }
- cat.save(catObj)  // cat.js promise return
+// ******* add cat **********
+// cat.save(catObj)  // cat.js promise return
+//.then(res=>console.log(res))
+//.catch(error=> console.log(error))
+
+// ***** update cat *******
+let updateCat = {
+    id : '60da14cf8df4fc26f400eb8d',
+    name : 'Desktop',
+}
+cat.update(updateCat)
+.then(res => console.log(res))
+.catch(error=>console.log(error))
+// ***** get all cat *******
+cat.all()
 .then(res=>console.log(res))
 .catch(error=> console.log(error))
 

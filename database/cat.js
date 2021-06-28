@@ -23,8 +23,25 @@ let save = (obj)=>{
     });
 }
 
-
+// **** update cat *******
+let update = (obj)=>{
+    return new Promise((resolve, reject)=>{
+        Cat.findById(obj.id,(err,data)=>{  // data is find value from database
+           if(err) {
+              reject(err);
+           }else{
+                data.name = obj.name ; // data.name = database from name
+                data.save((err,result)=>{
+                    if(err) reject(err)
+                    resolve(result);
+                });
+           }
+        });
+    });
+}
+// ********************** //
 module.exports = {
     all,
-    save
+    save,
+    update
 }
