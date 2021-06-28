@@ -22,7 +22,6 @@ let save = (obj)=>{
         })
     });
 }
-
 // **** update cat *******
 let update = (obj)=>{
     return new Promise((resolve, reject)=>{
@@ -39,9 +38,22 @@ let update = (obj)=>{
         });
     });
 }
+// **** delete cat *******
+let destroy = (id)=>{
+    return new Promise((resolve,reject)=>{
+       Cat.deleteOne({_id:id},(err)=>{
+           if(err){
+               reject(err)
+           }else{
+               resolve('Delete success!');
+           }
+       })
+    });
+}
 // ********************** //
 module.exports = {
     all,
     save,
-    update
+    update,
+    destroy
 }

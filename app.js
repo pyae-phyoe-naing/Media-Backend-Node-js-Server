@@ -15,16 +15,20 @@ let catObj = {
 //.catch(error=> console.log(error))
 
 // ***** update cat *******
-let updateCat = {
-    id : '60da14cf8df4fc26f400eb8d',
-    name : 'Desktop',
-}
-cat.update(updateCat)
-.then(res => console.log(res))
-.catch(error=>console.log(error))
-// ***** get all cat *******
-cat.all()
+// let updateCat = {
+//     id : '60da14cf8df4fc26f400eb8d',
+//     name : 'Desktop',
+// }
+// cat.update(updateCat)
+// .then(res => console.log(res))
+// .catch(error=>console.log(error))
+// ***** delete cat *******
+cat.destroy('60da14cf8df4fc26f400eb8d')
 .then(res=>console.log(res))
 .catch(error=> console.log(error))
+// ***** get all cat *******
+// cat.all()
+// .then(res=>console.log(res))
+// .catch(error=> console.log(error))
 
 app.listen(process.env.PORT,()=>console.log(`server is running at port ${process.env.PORT}`))
