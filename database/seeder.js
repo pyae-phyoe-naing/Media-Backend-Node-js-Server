@@ -4,7 +4,6 @@ let Cats = require('./cat');
 // first read seed json file
 
 let seedCat = ()=>{
-
         fs.readFile('categories.json',(err,data)=>{
            if(err){
               console.log('File cannot be read ',err);

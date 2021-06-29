@@ -19,8 +19,19 @@ let all = ()=>{
        })
     });
 }
-
+let destroy = (id)=>{
+    return new Promise((resolve,reject)=>{
+        Product.deleteOne({_id:id},(err)=>{
+            if(err) {
+                reject(err)
+            }else{
+                resolve('Delete success!');
+            }
+        })
+    })
+}
 module.exports = {
     save,
-    all
+    all,
+    destroy
 }
