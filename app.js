@@ -5,6 +5,7 @@ let express = require('express'),
         JwtStrategy = require('passport-jwt').Strategy,
         ExtractJwt = require('passport-jwt').ExtractJwt,
         passport = require('passport'),
+        path = require('path'),
         bodyParser = require('body-parser');
 
 let User = require('./database/user');
@@ -22,6 +23,8 @@ let myStrategy = new JwtStrategy(jwtOption, function(payload, done) {
        })
        .catch(err=>done(null,err))
     });
+    
+app.use(express.static(path.join(__dirname,'./asset')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}))
 passport.use(myStrategy);
