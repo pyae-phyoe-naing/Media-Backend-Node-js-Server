@@ -42,8 +42,22 @@ module.exports = (express,passport) => {
       // get gallery
       router.get('/gallery/all',passport.authenticate('jwt',{session:false}),(req,res)=>{
            Gallery.all()
-           .then(cat=>res.json({success:true,data:cat}))
+           .then(img=>res.json({success:true,data:img}))
            .catch(err=>res.json({success:false,data:err}))
-      })
+      });
+      // create product
+      router.post('/product/create',passport.authenticate('jwt',{session:false}),(req,res)=>{
+
+           let saveProduct = {
+                cat_id : req.body.cat_id,
+                name : req.body.name,
+                price : req.body.price,
+                image : req.body.image,
+                description : req.body.description
+           };
+          Product.save(saveProduct)
+         .then(product=>res.json({success:true,data:product}))
+         .catch(err=>res.json({success:false,data:err}))
+      });
      return router;
 }
