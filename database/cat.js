@@ -50,10 +50,29 @@ let destroy = (id)=>{
        })
     });
 }
+// **** Join table product *******
+let getProduct = (foreignId,localId,table)=>{
+    return new Promise((resolve,reject)=>{
+        Cat.aggregate([
+            {
+                $lookup :{
+                    from : table,
+                    localField : localId,
+                    foreignField : foreignId,
+                    as : 'Cat Product'
+                }
+            }
+        ]).exec((err,data)=>{
+            if(err) reject(err)
+            resolve(data)
+        })
+    });
+}
 // ********************** //
 module.exports = {
     all,
     save,
     update,
-    destroy
+    destroy,
+    getProduct
 }
