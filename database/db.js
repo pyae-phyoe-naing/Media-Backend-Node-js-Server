@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 let url = 'mongodb://localhost:27017/mediaDB';
 const connect = mongoose.connect(url,{useNewUrlParser:true,useUnifiedTopology: true,useFindAndModify: false,useCreateIndex: true},);
 const autoIncrement = require('mongoose-auto-increment');
+const mongoosepaginate = require('mongoose-paginate');
 //autoIncrement.initialize(mongoose.createConnection(url));// or
 autoIncrement.initialize(mongoose.connection);
 
@@ -25,9 +26,11 @@ let ProductScheme = new Schema({
 });
 // make autoincrement use mongoose-auto-increatement
 ProductScheme.plugin(autoIncrement.plugin,'product'); // product => table name
+ProductScheme.plugin(mongoosepaginate);
 let Product = mongoose.model('product',ProductScheme); // create products table
+
 
 module.exports = {
     Cat,
-    Product
+    Product,
 }

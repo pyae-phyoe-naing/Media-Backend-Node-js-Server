@@ -30,8 +30,24 @@ let destroy = (id)=>{
         })
     })
 }
+// ******* Paginate *********
+let paginate = (start,count)=>{
+    var options = {
+        sort : {_id : 1}, // 1, -1 reverse
+        lean:true, // no skip
+        page : start,
+        limit : count
+    };
+   return new Promise((resolve,reject)=>{
+      Product.paginate({},options,(err,res)=>{
+          if(err) reject(err)
+          resolve(res)
+      })
+   })
+}
 module.exports = {
     save,
     all,
-    destroy
+    destroy,
+    paginate
 }

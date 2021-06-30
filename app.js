@@ -2,9 +2,9 @@ require('dotenv').config();
 let express = require('express'),
         app = express();
 let product = require('./database/product');
-let cat = require('./database/cat');
 
-cat.getProduct('cat_id','id','products')
+
+product.paginate(1,200)
 .then(res=>console.log(res))
 .catch(err=>console.log(err));
 
