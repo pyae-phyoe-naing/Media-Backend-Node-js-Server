@@ -10,9 +10,10 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage }); 
 let Gallery = require('../database/gallery');
 let Product = require('../database/product');
+let Cat = require('../database/cat');
 module.exports = (express,passport) => {
      let router = express.Router();
-      
+       // single image upload
       router.get('/image/upload',passport.authenticate('jwt', { session: false }),upload.single('image'),(req,res,next)=>{
            let obj = {name:req.file.filename};                      
            Gallery.save(obj)
@@ -22,6 +23,7 @@ module.exports = (express,passport) => {
            .catch(err=> res.json({success:false,data:'image save fail!'}));
           
       });
+      // get product with paginate
       router.get('/product/paginate/:start/:count',passport.authenticate('jwt', { session: false }),(req,res)=>{
           let start = req.param('start'); // string
           let count = req.param('count'); // string change number
@@ -31,5 +33,17 @@ module.exports = (express,passport) => {
           })
           .catch(err=>res.json({success:false,data:err}))
       });
+      // get category
+      router.get('/cat/all',passport.authenticate('jwt', { session: false }),(req,res)=>{
+           Cat.all()
+           .then(cat=>res.json({success:true,data:cat}))
+           .catch(err=>res.json({success:false,data:err}))
+      });
+      // get gallery
+      router.get('/gallery/all',passport.authenticate('jwt',{session:false}),(req,res)=>{
+           Gallery.all()
+           .then(cat=>res.json({success:true,data:cat}))
+           .catch(err=>res.json({success:false,data:err}))
+      })
      return router;
 }
