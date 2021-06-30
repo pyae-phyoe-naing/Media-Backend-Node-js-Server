@@ -1,12 +1,19 @@
 require('dotenv').config();
 let express = require('express'),
-        app = express();
-let passgen = require('./helper/passgen')
-let hash ='$2a$10$bXWTQEoN35b7iKLbvjSQKOisEcowZEERM8UQHnOVp/uw8DuZR37GO';
+        app = express()
+        jwt = require('jsonwebtoken')
+        passport = require('passport'),
+        bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}))
 
-//passgen.encrypt('123')
-passgen.compare('12345','$2a$10$bXWTQEoN35b7iKLbvjSQKOisEcowZEERM8UQHnOVp/uw8DuZR37GO')
-.then(res=>console.log(res))
-.catch(err=>console.log(err));
+let guestRoute = require('./routes/guest') (express);
+let userRoute = require('./routes/user')(express,jwt);
+let adminRoute = require('./routes/admin') (express,passport);
+
+app.use('/guest',guestRoute);
+app.use('/user',userRoute);
+app.use('/admin',adminRoute);
+
 
 app.listen(process.env.PORT,()=>console.log(`server is running at port ${process.env.PORT}`));
