@@ -39,8 +39,17 @@ let UserScheme = new Schema({
 
 let User = mongoose.model('user',UserScheme);
 
+// ************ Gallergy Schema *********** //
+let GalleryScheme = new Schema({
+    name : {type:String,required:true}
+});
+GalleryScheme.plugin(autoIncrement.plugin,'gallery');
+let Gallery = mongoose.model('gallery',GalleryScheme);
+
+
 module.exports = {
     Cat,
     Product,
-    User
+    User,
+    Gallery
 }

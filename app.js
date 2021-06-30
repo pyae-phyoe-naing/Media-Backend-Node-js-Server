@@ -1,10 +1,13 @@
 require('dotenv').config();
 let express = require('express'),
         app = express();
-let user = require('./database/user');
+let gallery = require('./database/gallery');
 
-//user.findUserById('60dbfe5db02ca03ee03c729b')
-user.findUserByEmail('koaung@gmail.com')
+let galleryArray = {
+        'name' : 'coder.png'
+}
+//gallery.save(galleryArray)
+gallery.all()
 .then(res=>console.log(res))
 .catch(err=>console.log(err));
 
