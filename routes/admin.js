@@ -9,6 +9,7 @@ var storage = multer.diskStorage({
    })
 var upload = multer({ storage: storage }); 
 let Gallery = require('../database/gallery');
+let Product = require('../database/product');
 module.exports = (express,passport) => {
      let router = express.Router();
       
@@ -20,6 +21,15 @@ module.exports = (express,passport) => {
            })
            .catch(err=> res.json({success:false,data:'image save fail!'}));
           
+      });
+      router.get('/product/paginate/:start/:count',passport.authenticate('jwt', { session: false }),(req,res)=>{
+          let start = req.param('start'); // string
+          let count = req.param('count'); // string change number
+          Product.paginate(Number(start),Number(count))
+          .then(product=>{
+               res.json({success:true,data:product})
+          })
+          .catch(err=>res.json({success:false,data:err}))
       });
      return router;
 }
