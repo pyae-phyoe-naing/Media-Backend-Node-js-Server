@@ -3,14 +3,8 @@ let express = require('express'),
         app = express();
 let user = require('./database/user');
 
-let saveUser = {
-        'name' : 'Ko Aung',
-        'email':'koaung@gmail.com',
-        'password':'123',
-}
-
-//user.save(saveUser)
-user.all()
+//user.findUserById('60dbfe5db02ca03ee03c729b')
+user.findUserByEmail('koaung@gmail.com')
 .then(res=>console.log(res))
 .catch(err=>console.log(err));
 

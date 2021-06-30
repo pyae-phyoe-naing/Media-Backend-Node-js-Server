@@ -19,8 +19,25 @@ let save = (obj)=>{
        })
     });
 }
-
+let findUserById = (id)=>{
+      return new Promise((resolve,reject)=>{
+          User.findById(id,(err,res)=>{
+              if(err) reject(err)
+              resolve(res)
+          })
+      })
+}
+let findUserByEmail = (email)=>{
+    return new Promise((resolve,reject)=>{
+        User.findOne({'email':email},(err,res)=>{
+            if(err) reject(err)
+            resolve(res)
+        })
+    })
+}
 module.exports = {
     save,
-    all
+    all,
+    findUserById,
+    findUserByEmail
 }
