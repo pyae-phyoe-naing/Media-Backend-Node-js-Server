@@ -24,7 +24,7 @@ module.exports = (express,passport) => {
           
       });
       // get product with paginate
-      router.get('/product/paginate/:start/:count',passport.authenticate('jwt', { session: false }),(req,res)=>{
+      router.get('/product/:start/:count',passport.authenticate('jwt', { session: false }),(req,res)=>{
           let start = req.param('start'); // string
           let count = req.param('count'); // string change number
           Product.paginate(Number(start),Number(count))
@@ -34,7 +34,7 @@ module.exports = (express,passport) => {
           .catch(err=>res.json({success:false,data:err}))
       });
       // get category
-      router.get('/cat/all',passport.authenticate('jwt', { session: false }),(req,res)=>{
+      router.get('/cats/all',passport.authenticate('jwt', { session: false }),(req,res)=>{
            Cat.all()
            .then(cat=>res.json({success:true,data:cat}))
            .catch(err=>res.json({success:false,data:err}))

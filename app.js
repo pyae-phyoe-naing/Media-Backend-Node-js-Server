@@ -23,7 +23,7 @@ let myStrategy = new JwtStrategy(jwtOption, function(payload, done) {
        })
        .catch(err=>done(null,err))
     });
-    
+
 app.use(express.static(path.join(__dirname,'./asset')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}))
@@ -33,7 +33,7 @@ let guestRoute = require('./routes/guest') (express);
 let userRoute = require('./routes/user')(express,jwt);
 let adminRoute = require('./routes/admin') (express,passport);
 
-app.use('/guest',guestRoute);
+app.use('/',guestRoute);
 app.use('/user',userRoute);
 app.use('/admin',adminRoute);
 
