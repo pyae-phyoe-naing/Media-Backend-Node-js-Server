@@ -26,11 +26,21 @@ let ProductScheme = new Schema({
 });
 // make autoincrement use mongoose-auto-increatement
 ProductScheme.plugin(autoIncrement.plugin,'product'); // product => table name
-ProductScheme.plugin(mongoosepaginate);
+ProductScheme.plugin(mongoosepaginate); // pagination
 let Product = mongoose.model('product',ProductScheme); // create products table
 
+// ************ User Schema *********** //
+let UserScheme = new Schema({
+   name : {type:String,required:true},
+   email : {type:String,required:true},
+   password : {type:String,required:true},
+   since : {type:Date,required:true},
+});
+
+let User = mongoose.model('user',UserScheme);
 
 module.exports = {
     Cat,
     Product,
+    User
 }
